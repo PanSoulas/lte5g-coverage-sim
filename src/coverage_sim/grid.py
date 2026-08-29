@@ -35,16 +35,19 @@ def generate_grid(box: tuple, step_km: float) -> list[list[tuple[float, float]]]
     count = estimate_point_count(box, step_km)
     if count > MAX_POINTS:
         raise ValueError(f"Grid produces {count} points, exceeding the {MAX_POINTS} limit. Consider increasing the step size or reducing site coverage area.")
+    
+    
+    lons = []
+    point = Point(min_lat, min_lon)
+    while point.longitude <= max_lon:
+        lons.append(point.longitude)
+        point = geodesic(kilometers=step_km).destination(point, bearing=90)
 
-    grid = []
-    row_start = Point(min_lat, min_lon)
-    while row_start.latitude <= max_lat:
-        row = []
-        point = row_start
-        while point.longitude <= max_lon:
-            row.append((point.latitude, point.longitude))
-            point = geodesic(kilometers=step_km).destination(point, bearing=90)
-        grid.append(row)
-        row_start = geodesic(kilometers=step_km).destination(row_start, bearing=0)
+    lats = []
+    point = Point(min_lat, min_lon)
+    while point.latitude <= max_lat:
+        lats.append(point.latitude)
+        point = geodesic(kilometers=step_km).destination(point, bearing=0)
 
+    grid = [[(lat, lon) for lon in lons] for lat in lats]
     return grid

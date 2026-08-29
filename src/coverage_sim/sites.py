@@ -9,4 +9,4 @@ class Site:
     height_bs: float
     freq_mhz: float
     area_type: AreaType
-    tx_power_dbm: float = 43.0  # Default transmit power in dBm
+    tx_power_dbm: float = 60.0  # Default transmit power in dBm
