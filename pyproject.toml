@@ -2,6 +2,13 @@
 name = "coverage-sim"
 version = "0.1.0"
 requires-python = ">=3.10"
+dependencies = [
+    "geopy",
+    "folium",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
