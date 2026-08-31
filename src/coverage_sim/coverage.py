@@ -31,4 +31,24 @@ def compute_coverage(site: Site, model: PropagationModel, grid: list[list[tuple[
 
     return result
 
-    
+def best_server(sites: list[Site], coverage_grids: list[list[list[float | None]]]) -> list[list[tuple[str | None , float | None]]]:
+    num_rows = len(coverage_grids[0])
+    num_cols = len(coverage_grids[0][0])
+    result = []
+
+    for row_index in range(num_rows):
+        result_row = []
+        for col_index in range(num_cols):
+            best_site_name = None
+            best_rssi = None
+            for site, coverage_grid in zip(sites, coverage_grids):
+                loss = coverage_grid[row_index][col_index]
+                if loss is not None:
+                    rssi = site.tx_power_dbm - loss
+                    if best_rssi is None or rssi > best_rssi:
+                        best_rssi = rssi
+                        best_site_name = site.name
+            result_row.append((best_site_name, best_rssi))
+        result.append(result_row)
+    return result
+        
