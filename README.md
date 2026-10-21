@@ -2,7 +2,6 @@
 
 A Python tool that predicts cellular signal coverage around one or more base stations using empirical path loss models (**Okumura-Hata** and **COST-231 Hata**) and renders the result as an interactive map.
 
-![Single-site coverage map](docs/images/single_site.png)
 
 ## Features
 
@@ -15,13 +14,6 @@ A Python tool that predicts cellular signal coverage around one or more base sta
 - **Command-line interface** for single-site runs
 - **Automated tests and CI** (Python 3.12 and 3.14)
 
-## Example output
-
-| Single site (RSSI-colored) | Two sites (best server) |
-|---|---|
-| ![Single site](docs/images/single_site.png) | ![Best server](docs/images/best_server.png) |
-
-Single-site colors show signal strength (green = strong, yellow = moderate, red = weak, gray = outside the model's valid range). In the best-server map, each color marks the territory of one site.
 
 ## Installation
 
